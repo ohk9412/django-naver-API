@@ -1,0 +1,72 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+
+        <!-- pybo CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+
+        <link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.datalab/202104010127/css/datalab.css">
+        <link rel="stylesheet" type="text/css" href="https://ssl.pstatic.net/static.datalab/202104010127/css/graph.css">
+        <title></title>
+        <script language="javascript">
+            //상위 셀렉트로 하위 셀렉트 제어하기
+            function showSub(obj) {
+        
+                f = document.forms.ymd;
+        
+                if (obj == 1) {
+        
+                    f.SUB1.style.display = "";
+                    f.SUB2.style.display = "none";
+                    f.SUB3.style.display = "none";
+                    f.SUB4.style.display = "none";
+        
+                } else if (obj == 2) {
+        
+                    f.SUB1.style.display = "none";
+                    f.SUB2.style.display = "";
+                    f.SUB3.style.display = "none";
+                    f.SUB4.style.display = "none";
+        
+                } else if (obj == 3) {
+        
+                    f.SUB1.style.display = "none";
+                    f.SUB2.style.display = "none";
+                    f.SUB3.style.display = "";
+                    f.SUB4.style.display = "none";
+        
+                } else {
+        
+                    f.SUB1.style.display = "none";
+                    f.SUB2.style.display = "none";
+                    f.SUB3.style.display = "none";
+                    f.SUB4.style.display = "";
+        
+                }
+        
+            }
+        </script>
+    </head>
+    <body>
+    {% include "navbar.html" %}
+    {% block content %}
+    {% endblock %}
+    <!-- jQuery JS -->
+
+    {% block script %}
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.bundle.min.js' %}"></script>
+    <!-- 자바스크립트 Start -->
+
+    {% endblock %}
+    <!-- 자바스크립트 End -->
+    </body>
+
+</html>

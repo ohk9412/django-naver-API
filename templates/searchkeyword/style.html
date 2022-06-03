@@ -1,0 +1,435 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!--[endif]-->
+<!-- <div id="wrap" class="wrap">
+      <div id="header" class="header">
+
+          <div id="lnb" class="lnb">
+              <div class="lnb_innner">
+                  <ul class="lnb_list">
+
+
+
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div> -->
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+{% block script %}
+<script>
+$(document).ready(function ()
+{
+    $('.NO-CACHE').attr('src',function () { return $(this).attr('src') + "?a=" + Math.random() });
+});
+</script>
+{% endblock %}
+<script>
+    var nods = document.getElementsByClassName('NO-CACHE');
+    for (var i = 0; i < nods.length; i++) {
+        nods[i].attributes['src'].value += "?a=" + Math.random();
+    }
+</script>
+<div id="container" class="container" role="main">
+    <div id="content" class="content">
+        <div class="section_keyword">
+            <div class="com_title">
+                <h3 class="title">검색어트렌드</h3>
+                <em class="desc">네이버통합검색에서 특정 검색어가 얼마나 많이 검색되었는지 확인해보세요. 검색어를 기간별/연령별/성별로 조회할 수 있습니다.</em>
+            </div>
+            <div class="keyword_trend">
+                <!-- 검색조건 -->
+                <div class="section_step">
+                    <div class="com_box_inner">
+                        <form action="{% url 'searchkeyword:complete' %}" method='GET'>
+                            <fieldset>
+                                <legend class="blind">검색어 트렌드 조회</legend>
+                                <p class="guide_desc">궁금한 주제어를 설정하고, 하위 주제어에 해당하는 검색어를 콤마(,)로 구분입력해 주세요. 입력한 단어의 추이를 하나로
+                                    합산하여 해당 주제가 네이버에서 얼마나 검색되는지 조회할 수 있습니다.
+                                <div class="step_form">
+
+
+                                    <input type="hidden" id="qcType" value="N">
+                                    <input type="hidden" id="device" value="">
+                                    <input type="hidden" id="queryGroups" value="">
+                                    <input type="hidden" id="graphData">
+                                    <input type="hidden" id="startDate" value="">
+                                    <input type="hidden" id="endDate" value="">
+                                    <input type="hidden" id="vTimeDimension" value="date">
+                                    <input type="hidden" id="gender" value="">
+                                    <input type="hidden" id="age" value="">
+                                    <input type="hidden" id="maxYear" value="2021">
+                                    <input type="hidden" id="maxMonth" value="06">
+
+                                    <div class="form_row keyword">
+                                        <strong class="title">
+                                            <label for="item_keyword1">검색어</label>
+                                        </strong>
+                                        <div class="set_keyword">
+                                            <input type="text" value="" id="item_keyword1" name="item_keyword1"
+                                                class="input_text w1" placeholder="검색어 입력" data-text="">
+                                            <button type="button" class="btn_keyword_del"><span
+                                                    class="sp_btn_keyword_del"><span class="blind">입력 내용
+                                                        삭제</span></span></button>
+                                        </div>
+                                        <div class="set_keyword">
+                                            <label for="item_keyword1_1" class="blind" method='get'>검색어 하위 </label>
+                                            <input type="text" value="" id="item_sub_keyword1_1"
+                                                name="item_sub_keyword1_1" class="input_text w2"
+                                                placeholder="검색어에 해당하는 모든 검색어를 컴마(,)로 구분하여 최대 20개까지 입력" data-text="">
+                                            <button type="button" class="btn_keyword_del"><span
+                                                    class="sp_btn_keyword_del"><span class="blind">입력 내용
+                                                        삭제</span></span></button>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form_row hr">
+                                        <strong class="title">기간</strong>
+
+                                        <div class="set_period_target">
+                                            <div id="startYearDiv" class="select w2">
+                                                <input type="hidden" id="startYearInput" name="startYearInput"
+                                                    class="_select_input" value="2020">
+                                                <a href="#" id="startYear" class="select_btn">2020</a>
+                                                <ul class="select_list scroll_cst">
+                                                    <li class="select_item _item_2016"><a href="#"
+                                                            class="option">2016</a></li>
+                                                    <li class="select_item _item_2017"><a href="#"
+                                                            class="option">2017</a></li>
+                                                    <li class="select_item _item_2018"><a href="#"
+                                                            class="option">2018</a></li>
+                                                    <li class="select_item _item_2019"><a href="#"
+                                                            class="option">2019</a></li>
+                                                    <li class="select_item _item_2020"><a href="#"
+                                                            class="option">2020</a></li>
+                                                    <li class="select_item _item_2021"><a href="#"
+                                                            class="option">2021</a></li>
+                                                </ul>
+                                            </div>
+                                            <div id="startMonthDiv" class="select w3">
+                                                <input type="hidden" id="startMonthInput" name="startMonthInput"
+                                                    class="_select_input" value="06">
+                                                <a href="#" id="startMonth" class="select_btn">06</a>
+                                                <ul class="select_list scroll_cst">
+                                                    <li class="select_item _item_01"><a href="#" class="option">01</a>
+                                                    </li>
+                                                    <li class="select_item _item_02"><a href="#" class="option">02</a>
+                                                    </li>
+                                                    <li class="select_item _item_03"><a href="#" class="option">03</a>
+                                                    </li>
+                                                    <li class="select_item _item_04"><a href="#" class="option">04</a>
+                                                    </li>
+                                                    <li class="select_item _item_05"><a href="#" class="option">05</a>
+                                                    </li>
+                                                    <li class="select_item _item_06"><a href="#" class="option">06</a>
+                                                    </li>
+                                                    <li class="select_item _item_07"><a href="#" class="option">07</a>
+                                                    </li>
+                                                    <li class="select_item _item_08"><a href="#" class="option">08</a>
+                                                    </li>
+                                                    <li class="select_item _item_09"><a href="#" class="option">09</a>
+                                                    </li>
+                                                    <li class="select_item _item_10"><a href="#" class="option">10</a>
+                                                    </li>
+                                                    <li class="select_item _item_11"><a href="#" class="option">11</a>
+                                                    </li>
+                                                    <li class="select_item _item_12"><a href="#" class="option">12</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div id="startDayDiv" class="select w3">
+                                                <input type="hidden" id="startDayInput" name="startDayInput"
+                                                    class="_select_input" value="21">
+                                                <a href="#" id="startDay" class="select_btn">21</a>
+                                                <ul class="select_list scroll_cst">
+                                                    <li class="select_item _item_01"><a href="#" class="option">01</a>
+                                                    </li>
+                                                    <li class="select_item _item_02"><a href="#" class="option">02</a>
+                                                    </li>
+                                                    <li class="select_item _item_03"><a href="#" class="option">03</a>
+                                                    </li>
+                                                    <li class="select_item _item_04"><a href="#" class="option">04</a>
+                                                    </li>
+                                                    <li class="select_item _item_05"><a href="#" class="option">05</a>
+                                                    </li>
+                                                    <li class="select_item _item_06"><a href="#" class="option">06</a>
+                                                    </li>
+                                                    <li class="select_item _item_07"><a href="#" class="option">07</a>
+                                                    </li>
+                                                    <li class="select_item _item_08"><a href="#" class="option">08</a>
+                                                    </li>
+                                                    <li class="select_item _item_09"><a href="#" class="option">09</a>
+                                                    </li>
+                                                    <li class="select_item _item_10"><a href="#" class="option">10</a>
+                                                    </li>
+                                                    <li class="select_item _item_11"><a href="#" class="option">11</a>
+                                                    </li>
+                                                    <li class="select_item _item_12"><a href="#" class="option">12</a>
+                                                    </li>
+                                                    <li class="select_item _item_13"><a href="#" class="option">13</a>
+                                                    </li>
+                                                    <li class="select_item _item_14"><a href="#" class="option">14</a>
+                                                    </li>
+                                                    <li class="select_item _item_15"><a href="#" class="option">15</a>
+                                                    </li>
+                                                    <li class="select_item _item_16"><a href="#" class="option">16</a>
+                                                    </li>
+                                                    <li class="select_item _item_17"><a href="#" class="option">17</a>
+                                                    </li>
+                                                    <li class="select_item _item_18"><a href="#" class="option">18</a>
+                                                    </li>
+                                                    <li class="select_item _item_19"><a href="#" class="option">19</a>
+                                                    </li>
+                                                    <li class="select_item _item_20"><a href="#" class="option">20</a>
+                                                    </li>
+                                                    <li class="select_item _item_21"><a href="#" class="option">21</a>
+                                                    </li>
+                                                    <li class="select_item _item_22"><a href="#" class="option">22</a>
+                                                    </li>
+                                                    <li class="select_item _item_23"><a href="#" class="option">23</a>
+                                                    </li>
+                                                    <li class="select_item _item_24"><a href="#" class="option">24</a>
+                                                    </li>
+                                                    <li class="select_item _item_25"><a href="#" class="option">25</a>
+                                                    </li>
+                                                    <li class="select_item _item_26"><a href="#" class="option">26</a>
+                                                    </li>
+                                                    <li class="select_item _item_27"><a href="#" class="option">27</a>
+                                                    </li>
+                                                    <li class="select_item _item_28"><a href="#" class="option">28</a>
+                                                    </li>
+                                                    <li class="select_item _item_29"><a href="#" class="option">29</a>
+                                                    </li>
+                                                    <li class="select_item _item_30"><a href="#" class="option">30</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span class="bar">
+                                                <span class="blind">부터</span>
+                                            </span>
+                                            <div id="endYearDiv" class="select w2">
+                                                <input type="hidden" id="endYearInput" name="endYearInput"
+                                                    class="_select_input" value="2021">
+                                                <a href="#" id="endYear" class="select_btn">2021</a>
+                                                <ul class="select_list scroll_cst">
+                                                    <li class="select_item _item_2016"><a href="#"
+                                                            class="option">2016</a></li>
+                                                    <li class="select_item _item_2017"><a href="#"
+                                                            class="option">2017</a></li>
+                                                    <li class="select_item _item_2018"><a href="#"
+                                                            class="option">2018</a></li>
+                                                    <li class="select_item _item_2019"><a href="#"
+                                                            class="option">2019</a></li>
+                                                    <li class="select_item _item_2020"><a href="#"
+                                                            class="option">2020</a></li>
+                                                    <li class="select_item _item_2021"><a href="#"
+                                                            class="option">2021</a></li>
+                                                </ul>
+                                            </div>
+                                            <div id="endMonthDiv" class="select w3">
+                                                <input type="hidden" id="endMonthInput" name="endMonthInput"
+                                                    class="_select_input" value="06">
+                                                <a href="#" id="endMonth" class="select_btn">06</a>
+                                                <ul class="select_list scroll_cst">
+                                                    <li class="select_item _item_01"><a href="#" class="option">01</a>
+                                                    </li>
+                                                    <li class="select_item _item_02"><a href="#" class="option">02</a>
+                                                    </li>
+                                                    <li class="select_item _item_03"><a href="#" class="option">03</a>
+                                                    </li>
+                                                    <li class="select_item _item_04"><a href="#" class="option">04</a>
+                                                    </li>
+                                                    <li class="select_item _item_05"><a href="#" class="option">05</a>
+                                                    </li>
+                                                    <li class="select_item _item_06"><a href="#" class="option">06</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div id="endDayDiv" class="select w3">
+                                                <input type="hidden" id="endDayInput" name="endDayInput"
+                                                    class="_select_input" value="21">
+                                                <a href="#" id="endDay" class="select_btn">21</a>
+                                                <ul class="select_list scroll_cst">
+                                                    <li class="select_item _item_01"><a href="#" class="option">01</a>
+                                                    </li>
+                                                    <li class="select_item _item_02"><a href="#" class="option">02</a>
+                                                    </li>
+                                                    <li class="select_item _item_03"><a href="#" class="option">03</a>
+                                                    </li>
+                                                    <li class="select_item _item_04"><a href="#" class="option">04</a>
+                                                    </li>
+                                                    <li class="select_item _item_05"><a href="#" class="option">05</a>
+                                                    </li>
+                                                    <li class="select_item _item_06"><a href="#" class="option">06</a>
+                                                    </li>
+                                                    <li class="select_item _item_07"><a href="#" class="option">07</a>
+                                                    </li>
+                                                    <li class="select_item _item_08"><a href="#" class="option">08</a>
+                                                    </li>
+                                                    <li class="select_item _item_09"><a href="#" class="option">09</a>
+                                                    </li>
+                                                    <li class="select_item _item_10"><a href="#" class="option">10</a>
+                                                    </li>
+                                                    <li class="select_item _item_11"><a href="#" class="option">11</a>
+                                                    </li>
+                                                    <li class="select_item _item_12"><a href="#" class="option">12</a>
+                                                    </li>
+                                                    <li class="select_item _item_13"><a href="#" class="option">13</a>
+                                                    </li>
+                                                    <li class="select_item _item_14"><a href="#" class="option">14</a>
+                                                    </li>
+                                                    <li class="select_item _item_15"><a href="#" class="option">15</a>
+                                                    </li>
+                                                    <li class="select_item _item_16"><a href="#" class="option">16</a>
+                                                    </li>
+                                                    <li class="select_item _item_17"><a href="#" class="option">17</a>
+                                                    </li>
+                                                    <li class="select_item _item_18"><a href="#" class="option">18</a>
+                                                    </li>
+                                                    <li class="select_item _item_19"><a href="#" class="option">19</a>
+                                                    </li>
+                                                    <li class="select_item _item_20"><a href="#" class="option">20</a>
+                                                    </li>
+                                                    <li class="select_item _item_21"><a href="#" class="option">21</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p class="form_row_desc dot_ver">2016년 1월 이후 조회할 수 있습니다.</p>
+
+
+
+                                    </div>
+
+
+                                    <input type="submit" class="com_btn_srch">
+                                    </a>
+
+                                </div>
+
+                            </fieldset>
+
+
+
+                            <img id="itemImg" class="NO-CACHE" src="{% static 'search.png' %}" alt="" width="1000" height="" center=''>
+
+
+
+                            <div class="p-3 mb-2 bg-info text-white">{{q.1}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.2}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.3}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.4}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.5}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.6}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.7}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.8}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.9}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.10}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.11}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.12}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.13}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.14}}</div>
+                            <div class="p-3 mb-2 bg-info text-white">{{q.15}}</div>
+
+
+
+
+
+                        </form>
+
+                    </div>
+                </div>
+                <!-- //검색조건 -->
+
+                <!-- 검색어 트렌드 게시판 -->
+                <div class="section_ca_board">
+
+                </div>
+                <!-- //검색어 트렌드 게시판 -->
+            </div>
+
+        </div>
+
+
+    </div>
+    <div class="_data" style="display:none">
+        <span class="_subject_server"></span>
+        <span class="_keyword_server"></span>
+    </div>
+
+
+    <!-- <li padding='600px'> <img src="{% static 'search.png' %}" alt="" width="1500" height="" center='' >
+    -->
+
+
+    <!--[if lte IE 9]>
+  <div class="com_browser_pop" style="display:none">
+      <div class="pop_dimmed"></div>
+      <div class="pop_inner type_browser">
+          <strong class="browser_title">권장 브라우저 안내</strong>
+          <p class="browser_desc">
+              해당 사이트에 최적화된 브라우저는 Internet Explorer10 이상입니다<br>
+              편리한 사이트 이용을 위하여 최신 브라우저로 업그레이드를 권장합니다
+          </p>
+          <div class="browser_list">
+        <span class="list ie">
+          <span class="title">Internet Explore</span>
+        </span>
+              <span class="list firefox">
+          <span class="title">Firefox</span>
+        </span>
+              <span class="list chrome">
+          <span class="title">Google Chrome</span>
+        </span>
+              <span class="list safari">
+          <span class="title">Safari</span>
+        </span>
+          </div>
+          <div class="browser_close_chk">
+        <span class="select_chk _old_browser_cookie">
+          <input type="checkbox" id="item_browser" class="chk" checked="">
+          <label class="lbl" for="item_browser">이 메세지를 다시 표시하지 않습니다</label>
+        </span>
+          </div>
+          <a href="#" class="sp_btn_pop_close">
+              <span class="blind">권장 브라우저 안내 팝업 닫기</span>
+          </a>
+      </div>
+  </div>
+  <![endif]-->
+
+    <script type="text/javascript">
+        (function () {
+            window.$DATALAB = (typeof $DATALAB != "undefined") ? $DATALAB : {};
+            window.$DATALAB.CONFIG = (typeof $DATALAB.CONFIG != "undefined") ? $DATALAB.CONFIG : {};
+
+            $DATALAB.CONFIG.request_url = "'http://datalab.naver.com/keyword/trendSearch.naver";
+            $DATALAB.CONFIG.realTimeOpenDate = "";
+
+            if (location.href.indexOf("dev") > 0) {
+                window.lcs_SerName = "alpha-lcs.naver.com";
+            }
+        })();
+    </script>
+    <script type="text/javascript"
+        src="https://ssl.pstatic.net/static.datalab/202104010127/js/vendor.202104010127.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+    <li>
+        <script type="text/javascript"
+            src="https://ssl.pstatic.net/static.datalab/202104010127/js/trendsearch.202104010127.js"></script>
+    </li>
+
+    {% endblock %}

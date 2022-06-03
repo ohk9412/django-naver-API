@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+<div id="container" class="container" role="main">
+    <div id="content" class="content">
+        <form name="ymd" action="{% url 'shopping:main_cete' %}" method="get">
+            <input type='date' name='start' value="{{ form.start.value|default_if_none:'' }}" />
+            <input type='date' name='end' value="{{ form.end.value|default_if_none:'' }}" />
+            <select class="form-select" aria-label="Default select example" name='term'>
+                <option value="month">월간</option>
+                <option value="week">주간</option>
+                <option value="date">일간</option>
+            </select>
+
+            <select name="SUB" onChange="showSub(this.options[this.selectedIndex].value);">
+                <option value="1">남성의류</option>
+                <option value="2">남성언더웨어/잠옷</option>
+                <option value="3">여성의류</option>
+                <option value="4">여성언더웨어/잠옷</option>
+            </select>
+
+            <select name="SUB1" style="display: ;">
+                <option>--남성의류--</option>
+                <option value="50000831">니트</option>
+                <option value="50000830">티셔츠</option>
+                <option value="50000833">셔츠/남방</option>
+                <option value="50000832">카디건</option>
+                <option value="50000837">점퍼</option>
+                <option value="50000838">재킷</option>
+                <option value="50000839">코트</option>
+                <option value="50000835">청바지</option>
+                <option value="50000836">바지</option>
+                <option value="50000834">조끼</option>
+                <option value="50000840">정장세트</option>
+                <option value="50000841">트레이닝복 </option>
+                <option value="50000842">한복</option>
+                <option value="50000843">유니폼/단체복</option>
+                <option value="50000844">레인코트</option>
+                <option value="50006328">코디세트</option>
+                <option value="50008960">점프슈트</option>
+            </select>
+
+            <select name="SUB2" style="display: none;">
+                <option>--남성언더웨어/잠옷--</option>
+                <option value="50000845">팬티</option>
+                <option value="50000846">러닝</option>
+                <option value="50000847">러닝팬티세트</option>
+                <option value="50000848">잠옷/홈웨어</option>
+                <option value="50001456">시즌성내의</option>
+                <option value="50001455">보정속옷</option>
+            </select>
+
+            <select name="SUB3" style="display: none;">
+                <option>--여성의류--</option>
+                <option value="50000805">니트/스웨터</option>
+                <option value="50000803">티셔츠</option>
+                <option value="50000804">셔츠/블라우스</option>
+                <option value="50000806">카디건</option>
+                <option value="50000814">점퍼</option>
+                <option value="50000815">재킷</option>
+                <option value="50000813">코트</option>
+                <option value="50000809">청바지</option>
+                <option value="50000808">스커트</option>
+                <option value="50000810">바지</option>
+                <option value="50000812">레깅스</option>
+                <option value="50000817">조끼</option>
+                <option value="50000816">정장세트</option>
+                <option value="50000818">트레이닝복 </option>
+                <option value="50000819">한복</option>
+                <option value="50000820">파티복</option>
+                <option value="50000821">유니폼/단체복</option>
+                <option value="50000822">레인코트</option>
+                <option value="50000778">코디세트</option>
+                <option value="50000811">점프슈트</option>
+            </select>
+
+            <select name="SUB4" style="display: none;">
+                <option>--여성언더웨어/잠옷--</option>
+                <option value="50000823">브라</option>
+                <option value="50000824">팬티</option>
+                <option value="50000825">브라팬티세트</option>
+                <option value="50000826">잠옷/홈웨어 </option>
+                <option value="50001453">시즌성내의</option>
+                <option value="50001452">보정속옷</option>
+                <option value="50000827">슬립</option>
+                <option value="50000828">러닝/캐미솔</option>
+                <option value="50000829">속치마/속바지</option>
+                <option value="50001454">언데웨어소품</option>
+            </select>
+            <button type="submit" class="btn btn-primary">검색하기</button>
+        </form>
+
+        {% block script %}
+        <script>
+        $(document).ready(function ()
+        {$('.NO-CACHE').attr('src',function () { return $(this).attr('src') + "?a=" + Math.random() });});
+        </script>
+        {% endblock %}
+        <script>
+            var nods = document.getElementsByClassName('NO-CACHE');
+            for (var i = 0; i < nods.length; i++) {
+                nods[i].attributes['src'].value += "?a=" + Math.random();
+            }
+        </script>
+        <!-- $("#itemImg").attr("src", "/img/shirt.jpg?"+tmeDate.getTime()); -->
+        <div>
+            <li>
+                <img id="itemImg3" class="NO-CACHE" src="{% static 'shopping_cate.png'%}" alt='img' width="700"
+                    height="400" />
+            </li>
+            <li>
+                <img id="itemImg1" class="NO-CACHE" src="{% static 'shopping_device.png'%}" alt='img' width="350"
+                    height="200" />
+                <img id="itemImg2" class="NO-CACHE" src="{% static 'shopping_gender.png'%}" alt='img' width="350"
+                    height="200" />
+            </li>
+        </div>
+
+        <script>
+            window.onkeydown = function () {
+                var kcode = event.keyCode;
+                if (kcode == 116) {
+                    history.replaceState({}, null, location.href = "http://127.0.0.1:8000/main/");
+                }
+            }
+        </script>
+        <!-- <div class="container my-3">
+        <div class="col-8 text-right">
+            <a href="{% url 'shopping:main' %}">차트</a>
+        </div>
+    </div>
+</div> -->
+    </div>
+</div>
+{% endblock %}
